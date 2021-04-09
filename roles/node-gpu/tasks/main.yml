@@ -62,6 +62,12 @@
   poll: 0
   ignore_errors: true
 
+- name: 'Git checkout jetson-resizeSwapMemory'
+  ansible.builtin.git:
+    repo: 'https://github.com/JetsonHacksNano/resizeSwapMemory'
+    dest: /home/ubuntu/Workspace/resizeSwapMemory
+    version: HEAD
+
 - name: 'Reboot'
   shell: sleep 2 && reboot
   async: 1
