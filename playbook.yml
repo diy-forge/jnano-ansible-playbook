@@ -2,8 +2,8 @@
 
 - name: Ansible Playbook for configuring brand new Nvidia Jetson Nano
 
-  hosts: webservers
+  hosts: cluster
   roles:
-    - pi
+    - jetson
   remote_user: ubuntu
   become: yes
