@@ -4,6 +4,6 @@
 
   hosts: cluster
   roles:
-    - jetson
+    - node-gpu
   remote_user: ubuntu
   become: yes
