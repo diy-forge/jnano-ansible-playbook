@@ -7,14 +7,6 @@
 
 - name: 'Upgrade APT to the lastest packages'
   action: apt upgrade=safe
-  
-- name: Creates workspace
-  file:
-    path: /home/ubuntu/Workspace
-    state: directory
-    owner: ubuntu
-    group: ubuntu
-    mode: 0755
 
 - name: 'Install a list of packages'
   apt:
@@ -22,6 +14,35 @@
     - htop
     - curl
     - python3-dev
+
+- name: 'Creates workspace'
+  file:
+    path: /home/ubuntu/Workspace
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+    
+- name: 'Creates custom bin'
+  file:
+    path: /home/ubuntu/bin
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755    
+    PATH=$PATH:~/bin
+
+- name: 'Add a line to .profile'
+  ansible.builtin.lineinfile:
+    path: /home/ubuntu/bin
+    line: PATH=$PATH:~/bin
+    create: yes
+
+- name: 'Git checkout jetson-fan-ctl'
+  ansible.builtin.git:
+    repo: 'https://gist.github.com/Pelirrojo/7128bf99635d5c87e10b58ade1bf74fe'
+    dest: /home/ubuntu/bin
+    version: HEAD
 
 - name: 'Git checkout jetson-fan-ctl'
   ansible.builtin.git:
